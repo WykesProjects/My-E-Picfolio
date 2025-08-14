@@ -1,35 +1,137 @@
-/* === My-E-Picfolio Custom Styles === */
-
-/* Change the main font for a cleaner, modern look */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* ===== My-E-Picfolio - Base CSS ===== */
+/* Colour tokens */
+:root{
+  --bg:#0b0e13;
+  --panel:#121722;
+  --panel-2:#1a2030;
+  --text:#e7ecf2;
+  --muted:#aeb6c5;
+  --brand:#4ea1ff;
+  --brand-2:#7cd1ff;
+  --accent:#78ffcf;
+  --danger:#ff6b6b;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
 }
 
-/* Custom banner background overlay */
-#banner.major {
-  background: linear-gradient(to bottom right, rgba(0, 48, 96, 0.7), rgba(0, 0, 0, 0.6)),
-              url('../images/pic01.jpg') center/cover no-repeat;
+/* CSS reset - small, safe */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+
+/* Typography */
+html{font-size:16px}
+body{
+  background:linear-gradient(180deg,#0a0d12 0%, #0b0e13 30%, #0c1018 100%);
+  color:var(--text);
+  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  line-height:1.65;
+}
+h1,h2,h3{line-height:1.25;margin:0 0 .6rem}
+h1{font-size:2.2rem}
+h2{font-size:1.5rem}
+h3{font-size:1.1rem}
+p{margin:.75rem 0;color:var(--muted)}
+
+/* Layout helpers */
+.wrapper{max-width:1100px;margin:0 auto;padding:0 1.25rem}
+.wrapper.alt{background:transparent}
+.inner{padding:2.5rem 0}
+
+/* Header */
+#header{
+  position:sticky; top:0; z-index:20;
+  background:rgba(10,13,18,.55); backdrop-filter:saturate(140%) blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+#header .logo{display:inline-block;padding:1rem 0;font-weight:700;letter-spacing:.3px}
+#header .logo strong{color:var(--text)}
+#header .logo span{color:var(--brand)}
+#header nav a{display:inline-block;padding:.85rem 1rem;border:1px solid rgba(255,255,255,0);border-radius:.6rem}
+#header nav a:hover{border-color:rgba(255,255,255,.12)}
+
+/* Slide-in menu (uses your existing #menu) */
+#menu{
+  position:fixed; inset:0 0 0 auto; width:min(320px,80vw);
+  background:var(--panel); transform:translateX(100%); transition:transform .3s ease;
+  padding:1rem 1.2rem; box-shadow:var(--shadow);
+}
+#menu .links{list-style:none;margin:0;padding:0}
+#menu .links li{margin:.4rem 0}
+#menu .links a{display:block;padding:.7rem .8rem;border-radius:.5rem;color:var(--text);background:transparent}
+#menu .links a:hover{background:var(--panel-2)}
+/* HTML5 UP toggles this via JS - your main.js already handles open/close */
+
+/* Banner hero */
+#banner.major{
+  background:
+    radial-gradient(1200px 400px at 20% 0%, rgba(78,161,255,.25), transparent 60%),
+    radial-gradient(1200px 400px at 100% 30%, rgba(120,255,207,.20), transparent 60%),
+    linear-gradient(180deg, #121722 0%, #0c111a 100%);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+#banner .inner{padding:4.5rem 0 3rem}
+#banner .major h1{
+  font-size:2.6rem; font-weight:800; letter-spacing:.2px;
+  background:linear-gradient(90deg,var(--brand),var(--brand-2));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+#banner .content p{max-width:700px}
+
+/* Buttons */
+.button, .actions .button{
+  display:inline-block; padding:.75rem 1.1rem; border-radius:.7rem;
+  background:var(--brand); color:#0b0e13; font-weight:700; letter-spacing:.2px;
+  border:1px solid transparent; transition:transform .12s ease, box-shadow .2s ease, background .2s ease;
+}
+.button:hover{transform:translateY(-1px); box-shadow:var(--shadow)}
+.button.next{background:linear-gradient(90deg,var(--brand),var(--brand-2))}
+.button.primary{background:var(--brand)}
+
+/* Tiles */
+.tiles{display:grid; gap:1.1rem; grid-template-columns:repeat(12,1fr); padding:2rem 0}
+.tiles article{
+  grid-column: span 6;
+  background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.00));
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:1rem; overflow:hidden; position:relative; box-shadow:none; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.tiles article:hover{transform:translateY(-4px); box-shadow:var(--shadow); border-color:rgba(255,255,255,.12)}
+.tiles article .image img{width:100%; height:220px; object-fit:cover; filter:saturate(110%)}
+.tiles article .major{padding:1rem 1rem 1.2rem}
+.tiles article .major h3 a{color:var(--text)}
+.tiles article .major p{margin:.3rem 0 0}
+
+/* “About This Portfolio” section */
+#two{border-top:1px solid rgba(255,255,255,.06)}
+#two .inner{padding:2.2rem 0}
+#two .button.next{margin-top:.8rem}
+
+/* Contact */
+#contact{border-top:1px solid rgba(255,255,255,.06); background:rgba(255,255,255,.02)}
+#contact .inner{display:grid; gap:1.5rem}
+#contact form .fields{display:grid; gap:1rem; grid-template-columns:1fr 1fr}
+#contact form .field{display:flex; flex-direction:column}
+#contact input, #contact textarea{
+  background:var(--panel); color:var(--text);
+  border:1px solid rgba(255,255,255,.10); border-radius:.6rem; padding:.7rem .8rem;
+}
+#contact input:focus, #contact textarea:focus{outline:none;border-color:var(--brand)}
+#contact .contact-method{background:var(--panel); border:1px solid rgba(255,255,255,.06); border-radius:.8rem; padding:1rem}
+
+/* Footer */
+#footer{background:transparent;border-top:1px solid rgba(255,255,255,.06)}
+#footer .inner{padding:1.2rem 0}
+#footer a{color:var(--brand)}
+
+/* Small screens */
+@media (max-width: 900px){
+  .tiles article{grid-column: span 12}
+  #contact form .fields{grid-template-columns:1fr}
+  #banner .inner{padding:3.5rem 0 2rem}
+  h1{font-size:1.9rem}
 }
 
-/* Make buttons use a custom blue shade */
-.button.primary {
-  background-color: #1e90ff;
-  border: none;
-}
-.button.primary:hover {
-  background-color: #104e8b;
-}
-
-/* Add subtle hover lift to tiles */
-.tiles article {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.tiles article:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-}
-
-/* Footer background colour tweak */
-#footer {
-  background-color: #0d0d0d;
-}
+/* Subtle link style */
+a{color:var(--brand)}
+a:hover{color:var(--brand-2)}
